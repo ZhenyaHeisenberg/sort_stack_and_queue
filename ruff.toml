@@ -1,0 +1,27 @@
+# ruff.toml
+line-length = 88
+target-version = "py310"
+
+# Включаем правила
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+]
+
+# Игнорируем определенные правила
+ignore = [
+    "E501",  # line too long, handled by black
+    "F841",  # unused variable
+]
+
+# Настройки для конкретных правил
+[flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[isort]
+known-first-party = ["myproject"]
