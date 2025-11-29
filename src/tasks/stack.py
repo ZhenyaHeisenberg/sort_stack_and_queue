@@ -61,7 +61,7 @@ class Stack:
             print("Stack is empty\n")
             return "Stack is empty"
     
-    def str(self):
+    def str(self) -> list[float]:
         print(f"Stack = {self.items}\n")
         return f"Stack = {self.items}"
 
