@@ -34,6 +34,7 @@ parallel = true
 omit = [
     "*/__init__.py",
     "*/main.py*",
+    "*/config.py*",
     ]
 
 
