@@ -69,14 +69,14 @@ def test_front():
     queue.enqueue(6)
     queue.enqueue(-6.5)
     
-    assert queue.front() == -6.5
+    assert queue.front() == 5
     
     queue.enqueue(9)
-    assert queue.front() == 9
+    assert queue.front() == 5
     
     queue.dequeue()
     queue.dequeue()
-    assert queue.front() == 9
+    assert queue.front() == -6.5
     
     queue.dequeue()
     assert queue.front() == 9
