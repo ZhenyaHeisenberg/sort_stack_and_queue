@@ -78,6 +78,9 @@ def main(): # pragma: no cover
         
         user_input = [str(x) for x in input().split()]
         
+        if not user_input:
+            continue
+        
         command = user_input[0]
         
         
