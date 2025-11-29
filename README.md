@@ -50,3 +50,40 @@
 *   Включает проверки ошибок с user-friendly выводом для всех операций.
 *   Все операции сопровождаются выводом информации для пользователя.
 *   Для быстрого доступа к min/max элементам используется дополнительный отсортированный список.
+
+## Установка
+```bash
+git clone https://github.com/ZhenyaHeisenberg/sort_stack_and_queue
+```
+
+## Примеры использования
+
+### Стек
+```txt
+push 5
+push 1.8
+peek
+min
+max
+pop
+str
+len
+```
+
+### Очередь
+```txt
+enqueue 5
+enqueue 1.8
+front
+min
+max
+dequeue
+str
+len
+```
+
+## Тестирование
+```bash
+# Находясь в корне проекта
+python -m pytest --cov=src --cov-report=term-missing
+```
