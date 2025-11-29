@@ -58,13 +58,14 @@ def test_sort():
     assert bubble_sort(arr_string) == sorted(arr_string)
     assert bubble_sort(arr_empty) == []
     
-    assert bucket_sort(arr_int_n1) == sorted(arr_int_n1)
+    assert bucket_sort(arr_int_n1, "") == sorted(arr_int_n1)
     assert bucket_sort(arr_int_n1, 10) == sorted(arr_int_n1)
-    assert bucket_sort(arr_int_n2) == sorted(arr_int_n2)
-    assert bucket_sort(arr_int_n3) == sorted(arr_int_n3)
-    assert bucket_sort(arr_float) == sorted(arr_float)
-    assert bucket_sort(arr_int_n1, -2) == "The number of baskets must be >= 1"
-    assert bucket_sort(arr_empty) == []
+    assert bucket_sort(arr_int_n1, "text") == "The number of baskets must be a natural number"
+    assert bucket_sort(arr_int_n2, "") == sorted(arr_int_n2)
+    assert bucket_sort(arr_int_n3, "") == sorted(arr_int_n3)
+    assert bucket_sort(arr_float, "") == sorted(arr_float)
+    assert bucket_sort(arr_int_n1, -2) == "The number of baskets must be a natural number >= 1"
+    assert bucket_sort(arr_empty, "") == []
     
     assert counting_sort(arr_int_n1) == sorted(arr_int_n1)
     assert counting_sort(arr_int_n2) == sorted(arr_int_n2)
@@ -85,8 +86,8 @@ def test_sort():
     assert quick_sort(arr_empty) == []
     
     assert radix_sort(arr_int_n1, 10) == sorted(arr_int_n1)
-    assert radix_sort(arr_int_n2) == sorted(arr_int_n2)
-    assert radix_sort(arr_int_n3) == sorted(arr_int_n3)
-    assert radix_sort(arr_int_n1, 1) == "base must be >= 2"
-    assert radix_sort(arr_empty) == []
+    assert radix_sort(arr_int_n2, "") == sorted(arr_int_n2)
+    assert radix_sort(arr_int_n3, "") == sorted(arr_int_n3)
+    assert radix_sort(arr_int_n1, 1) == "base must a natural number >= 2"
+    assert radix_sort(arr_empty, "") == []
 

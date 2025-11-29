@@ -1,3 +1,17 @@
+import sys
+import os
+import logging.config
+
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from common.config import LOGGING_CONFIG
+
+logging.config.dictConfig(LOGGING_CONFIG)
+
+logger = logging.getLogger(__name__)
+
+
 class Queue:
     
     def __init__(self):
@@ -24,6 +38,7 @@ class Queue:
             return x
         else:
             print("queue is empty\n")
+            logger.error("queue is empty")
             return "queue is empty"
     
     def front(self) -> float | str:
@@ -32,6 +47,7 @@ class Queue:
             return self.items[0]
         else:
             print("queue is empty\n")
+            logger.error("queue is empty")
             return "queue is empty"
     
     def __len__(self) -> int:
@@ -50,6 +66,7 @@ class Queue:
             return self.items_sorted[0]
         else:
             print("queue is empty\n")
+            logger.error("queue is empty")
             return "queue is empty"
     
     def max(self) -> float:
@@ -58,6 +75,7 @@ class Queue:
             return self.items_sorted[-1]
         else:
             print("queue is empty\n")
+            logger.error("queue is empty")
             return "queue is empty"
     
     
@@ -80,6 +98,13 @@ def main(): # pragma: no cover
         
         command = user_input[0]
         
+        commands = ["enqueue", "dequeue", "front", "is_empty", "len", "min", "max", "str", "clear"]
+        
+        if command not in commands:
+            print(f"unknown command: '{command}'\n")
+            logger.error(f"unknown command: '{command}'")
+            continue
+        
         
         if command == "enqueue":
             try:
@@ -89,15 +114,18 @@ def main(): # pragma: no cover
             
             except ValueError:
                 print(f"Not is a number: '{user_input[1]}'\n")
+                logger.error(f"Not is a number: '{user_input[1]}'")
                 continue
                 
             except IndexError:
                 print("Input 'enqueue <argument>'\n")
+                logger.error("Input 'enqueue <argument>'")
                 continue
         
         elif command != "enqueue":
             if len(user_input) > 1:
                 print(f"Input just '{command}' without <argument>\n")
+                logger.error(f"Input just '{command}' without <argument>")
                 continue
             
         
@@ -124,6 +152,7 @@ def main(): # pragma: no cover
                 
             case _:
                 print(f"unknown command: '{command}'\n")
+                logger.error(f"unknown command: '{command}'")
         
     
     

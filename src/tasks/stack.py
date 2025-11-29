@@ -1,3 +1,17 @@
+import sys
+import os
+import logging.config
+
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+
+from common.config import LOGGING_CONFIG
+
+logging.config.dictConfig(LOGGING_CONFIG)
+
+logger = logging.getLogger(__name__)
+
+
 class Stack:
     
     def __init__(self):
@@ -24,6 +38,7 @@ class Stack:
             return x
         else:
             print("Stack is empty\n")
+            logger.error("Stack is empty")
             return "Stack is empty"
     
     def peek(self) -> float | str:
@@ -32,6 +47,7 @@ class Stack:
             return self.items[-1]
         else:
             print("Stack is empty\n")
+            logger.error("Stack is empty")
             return "Stack is empty"
     
     def __len__(self) -> int:
@@ -51,6 +67,7 @@ class Stack:
             return self.items_sorted[0]
         else:
             print("Stack is empty\n")
+            logger.error("Stack is empty")
             return "Stack is empty"
     
     def max(self) -> float:
@@ -59,6 +76,7 @@ class Stack:
             return self.items_sorted[-1]
         else:
             print("Stack is empty\n")
+            logger.error("Stack is empty")
             return "Stack is empty"
     
     def str(self) -> list[float]:
@@ -83,6 +101,13 @@ def main(): # pragma: no cover
         
         command = user_input[0]
         
+        commands = ["push", "pop", "peek", "is_empty", "len", "min", "max", "str", "clear"]
+        
+        if command not in commands:
+            print(f"unknown command: '{command}'\n")
+            logger.error(f"unknown command: '{command}'")
+            continue
+        
         
         if command == "push":
             try:
@@ -92,15 +117,18 @@ def main(): # pragma: no cover
             
             except ValueError:
                 print(f"Not is a number: '{user_input[1]}'\n")
+                logger.error(f"Not is a number: '{user_input[1]}'")
                 continue
                 
             except IndexError:
                 print("Input 'push <argument>'\n")
+                logger.error("Input 'push <argument>'")
                 continue
         
         elif command != "push":
             if len(user_input) > 1:
                 print(f"Input just '{command}' without <argument>\n")
+                logger.error(f"Input just '{command}' without <argument>")
                 continue
             
         
@@ -127,6 +155,7 @@ def main(): # pragma: no cover
                 
             case _:
                 print(f"unknown command: '{command}'\n")
+                logger.error(f"unknown command: '{command}'")
 
 
 

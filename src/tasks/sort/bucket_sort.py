@@ -1,12 +1,22 @@
-from .bubble_sort import bubble_sort
+import sys
+import os
+import logging.config
 
-import logging
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+from common.config import LOGGING_CONFIG
+
+logging.config.dictConfig(LOGGING_CONFIG)
 
 logger = logging.getLogger(__name__)
 
 
+from .bubble_sort import bubble_sort
+
+
 def bucket_sort(arr: list[float], buckets: int | None = None) -> list[float] | str: 
-    if buckets is None:
+    if buckets == "":
         n = len(arr)
 
         if n < 50:
@@ -15,11 +25,15 @@ def bucket_sort(arr: list[float], buckets: int | None = None) -> list[float] | s
             bucket_list = [[] for x in range(n // 10)]
         else:
             bucket_list = [[] for x in range(round(n**0.5))]
-    elif buckets < 1:
-        return "The number of baskets must be >= 1"
+    elif isinstance(buckets, int) and buckets < 1:
+        logger.error("The number of baskets must be a natural number >= 1")
+        return "The number of baskets must be a natural number >= 1"
     
-    else:
+    elif isinstance(buckets, int):
         bucket_list = [[] for x in range(buckets)]
+    else:
+        logger.error("The number of baskets must be a natural number")
+        return "The number of baskets must be a natural number"
         
     if arr == []:
         return []

@@ -2,12 +2,11 @@ import sys
 import os
 import logging.config
 
-# Добавляем корневую директорию проекта в Python path
+
 sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 
 from common.config import LOGGING_CONFIG
 
-# Настраиваем логирование
 logging.config.dictConfig(LOGGING_CONFIG)
 
 logger = logging.getLogger(__name__)
@@ -35,6 +34,7 @@ def sort():
     
     if flag_type not in ["1", "2"]:
         print("Input just a number from 1 to 2")
+        logger.error("Input just a number from 1 to 2")
         return None
     
     
@@ -42,12 +42,8 @@ def sort():
     print("\nWhich type of sort you want to use:\n1. bubble_sort\n2. bucket_sort\n3. counting_sort\n4. heap_sort\n5. quick_sort\n6. radix_sort\n")
     
     sort_type = input("Sort type: ") # function sort
-    
-    inputed = input("Array: ")
-    inputed = inputed.replace(" ", "")
-    inputed = inputed.replace("[", "")
-    inputed = inputed.replace("]", "")
-    arr_str = inputed.split(",")
+    print("Input nubers of array using space")
+    arr_str = input("Array: ").split()
     
     
     arr = [float(x) for x in arr_str]
@@ -61,7 +57,8 @@ def sort():
             log_massage = (f"Array sorted by bubble_sort: {arr}")
             
         case "2":
-            arr = bucket_sort(arr)
+            buckets = input("Input number of buckets (empty to use default): ")
+            arr = bucket_sort(arr, buckets)
             log_massage = (f"Array sorted by bucket_sort: {arr}")
             
         case "3":
@@ -77,8 +74,8 @@ def sort():
             log_massage = (f"Array sorted by quick_sort: {arr}")
             
         case "6":
-            arr = radix_sort(arr)
-            log_massage = 1
+            base = input("Input number of base (empty to use default: 10): ")
+            arr = radix_sort(arr, base)
             log_massage = (f"Array sorted by radix_sort: {arr}")
             
         case _:
@@ -86,12 +83,17 @@ def sort():
             logger.error("nput just a number from 1 to 6")
             return None
     
+    if isinstance(arr, str):
+        print(arr)
+        logger.error(arr)
+        return arr
+    
     match flag_type:
         case "1":
-            print(f"Sorted array: {arr}") # Straight
+            print(f"\nSorted array: {arr}\n") # Straight
             logger.info(f"{log_massage} (Straight)")
         case "2":
-            print(f"Sorted array: {arr[::-1]}") # Reverse
+            print(f"\nSorted array: {arr[::-1]}\n") # Reverse
             logger.info(f"{log_massage} (Reverse)")
         case _:
             print("Input just a number from 1 to 2")

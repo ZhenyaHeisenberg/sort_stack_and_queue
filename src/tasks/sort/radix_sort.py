@@ -1,4 +1,19 @@
-def sub_radix_sort(a: list[int], base: int = 10) -> list[int]:
+import sys
+import os
+import logging.config
+
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+
+from common.config import LOGGING_CONFIG
+
+logging.config.dictConfig(LOGGING_CONFIG)
+
+logger = logging.getLogger(__name__)
+
+def sub_radix_sort(a: list[int], base: int) -> list[int]:
+    
+    
     
     if len(a) == 0:
         return []
@@ -26,10 +41,14 @@ def sub_radix_sort(a: list[int], base: int = 10) -> list[int]:
     
     return arr
 
-def radix_sort(a: list[int], base: int = 10) -> list[int]:
+def radix_sort(a: list[int], base: int) -> list[int]:
     
-    if base < 2:
-        return "base must be >= 2"
+    if base == "":
+        base = 10
+    
+    elif not isinstance(base, int) or base < 2:
+        logger.error("base must a natural number >= 2")
+        return "base must a natural number >= 2"
 
     
     negative_arr = [abs(x) for x in a if x<0]
