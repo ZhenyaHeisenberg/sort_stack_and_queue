@@ -28,8 +28,8 @@ class Queue:
     
     def front(self) -> float | str:
         if len(self.items) != 0:
-            print(f"front element = {self.items[-1]}\n")
-            return self.items[-1]
+            print(f"front element = {self.items[0]}\n")
+            return self.items[0]
         else:
             print("queue is empty\n")
             return "queue is empty"
@@ -43,7 +43,6 @@ class Queue:
         self.items = []
         self.items_sorted = []
         print("queue cleared\n")
-        return []
     
     def min(self) -> float:
         if len(self.items_sorted) != 0: 
@@ -55,7 +54,7 @@ class Queue:
     
     def max(self) -> float:
         if len(self.items_sorted) != 0:
-            print(f"min element = {self.items_sorted[-1]}\n") # O(1)
+            print(f"max element = {self.items_sorted[-1]}\n") # O(1)
             return self.items_sorted[-1]
         else:
             print("queue is empty\n")
@@ -75,6 +74,9 @@ def main(): # pragma: no cover
     while True:
         
         user_input = [str(x) for x in input().split()]
+        
+        if not user_input:
+            continue
         
         command = user_input[0]
         
@@ -110,7 +112,7 @@ def main(): # pragma: no cover
             case "is_empty":
                 queue.is_empty()
             case "len":
-                queue.len()
+                queue.__len__()
             case "min":
                 queue.min()
             case "max":

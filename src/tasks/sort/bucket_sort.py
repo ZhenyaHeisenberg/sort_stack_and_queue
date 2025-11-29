@@ -1,5 +1,10 @@
 from .bubble_sort import bubble_sort
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 def bucket_sort(arr: list[float], buckets: int | None = None) -> list[float] | str: 
     if buckets is None:
         n = len(arr)
