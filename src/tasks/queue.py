@@ -61,7 +61,7 @@ class Queue:
             return "queue is empty"
     
     
-    def str(self):
+    def str(self) -> list[float]:
         print(f"Queue = {self.items}\n")
         return f"Queue = {self.items}"
 
