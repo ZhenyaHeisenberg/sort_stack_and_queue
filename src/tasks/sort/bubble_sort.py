@@ -1,4 +1,4 @@
-def bubble_sort(a: list[int]) -> list[int]:
+def bubble_sort(a: list[int]) -> list[int]: # O(n^2)
     i = 0
     t = True
     while t:

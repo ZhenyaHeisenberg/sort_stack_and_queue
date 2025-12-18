@@ -1,4 +1,4 @@
-def partition(a: list[int], start: int, end: int) -> int:
+def partition(a: list[int], start: int, end: int) -> int: # O(n*log(n)) | O(n^2)    
     v = a[(start + end) // 2]
     i = start
     j = end

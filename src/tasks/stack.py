@@ -1,14 +1,18 @@
-import sys
 import os
-import logging.config
+import sys
+import logging
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.dirname(current_dir)
+sys.path.insert(0, src_dir)
 
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
-from common.config import LOGGING_CONFIG
+try: #pragma: no cover
+    from common.config import LOGGING_CONFIG
+except ImportError: #pragma: no cover
+    from src.common.config import LOGGING_CONFIG 
 
 logging.config.dictConfig(LOGGING_CONFIG)
-
 logger = logging.getLogger(__name__)
 
 
@@ -16,7 +20,8 @@ class Stack:
     
     def __init__(self):
         self.items = []  # используем list для хранения данных
-        self.items_sorted = []
+        self.min_elm = None
+        self.max_elm = None
     
     def is_empty(self) -> bool:
         print(len(self.items) == 0)
@@ -24,15 +29,24 @@ class Stack:
     
     def push(self, x: float) -> None: 
         self.items.append(x)
-        
-        self.items_sorted = sorted(self.items)
+        if self.min_elm is None or x < self.min_elm:
+            self.min_elm = x
+        if self.max_elm is None or x > self.max_elm:
+            self.max_elm = x
         
     def pop(self) -> float | str:
         if len(self.items) != 0:
             x = self.items[-1]
-            self.items.pop(-1)
+            self.items.pop()
             
-            self.items_sorted = sorted(self.items)
+            if len(self.items) != 0:
+                if x == self.min_elm:
+                    self.min_elm = min(self.items)
+                if x == self.max_elm:
+                    self.max_elm = max(self.items)
+            else:
+                self.min_elm = None
+                self.max_elm = None
             
             print(f"element deleted: {x}\n")
             return x
@@ -57,29 +71,30 @@ class Stack:
     
     def clear(self) -> None:
         self.items = []
-        self.items_sorted = []
+        self.min_elm = None
+        self.max_elm = None
         print("stack cleared\n")
 
     
     def min(self) -> float:
-        if len(self.items_sorted) != 0: 
-            print(f"min element = {self.items_sorted[0]}\n") # O(1)
-            return self.items_sorted[0]
+        if len(self.items) != 0: 
+            print(f"min element = {self.min_elm}\n")
+            return self.min_elm
         else:
             print("Stack is empty\n")
             logger.error("Stack is empty")
             return "Stack is empty"
     
     def max(self) -> float:
-        if len(self.items_sorted) != 0:
-            print(f"max element = {self.items_sorted[-1]}\n") # O(1)
-            return self.items_sorted[-1]
+        if len(self.items) != 0:
+            print(f"max element = {self.max_elm}\n")
+            return self.max_elm
         else:
             print("Stack is empty\n")
             logger.error("Stack is empty")
             return "Stack is empty"
     
-    def str(self) -> list[float]:
+    def str(self) -> str:
         print(f"Stack = {self.items}\n")
         return f"Stack = {self.items}"
 

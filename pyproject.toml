@@ -5,8 +5,10 @@ description = "description"
 requires-python = ">=3.12"
 dependencies = [
     "pytest>=8.4.2",
-    "pip>=25.3",
 ]
+
+[project.scripts]
+queue-cli = "src.main:main"
 
 [tool.uv]
 dev-dependencies=[

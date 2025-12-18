@@ -1,4 +1,4 @@
-def counting_sort(arr: list[int]) -> list[int]:
+def counting_sort(arr: list[int]) -> list[int]: # O(n + k)
     
     if len(arr) == 0:
         return []

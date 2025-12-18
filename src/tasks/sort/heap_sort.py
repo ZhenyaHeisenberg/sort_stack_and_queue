@@ -1,4 +1,4 @@
-def build_tree(arr, n, i):
+def build_tree(arr, n, i): # O(n*log(n))
     root = i
     
     left_child = i*2 + 1

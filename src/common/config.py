@@ -18,6 +18,7 @@ LOGGING_CONFIG = {
             "class": "logging.StreamHandler",
             "formatter": "standard",
             "level": "INFO",
+            "stream": "ext://sys.stdout"
         },
         "file": {
             "class": "logging.handlers.RotatingFileHandler",
@@ -27,6 +28,7 @@ LOGGING_CONFIG = {
             "maxBytes": 5 * 1024 * 1024,  # 5 MB before rotating
             "backupCount": 5,
             "level": "INFO",
+            "encoding": "utf-8"
         },
     },
     "loggers": {

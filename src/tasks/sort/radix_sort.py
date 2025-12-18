@@ -1,17 +1,21 @@
-import sys
 import os
-import logging.config
+import sys
+import logging
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+src_dir = os.path.dirname(current_dir)
+sys.path.insert(0, src_dir)
 
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
-
-from common.config import LOGGING_CONFIG
+try: #pragma: no cover
+    from common.config import LOGGING_CONFIG
+except ImportError: #pragma: no cover
+    from src.common.config import LOGGING_CONFIG 
 
 logging.config.dictConfig(LOGGING_CONFIG)
-
 logger = logging.getLogger(__name__)
 
-def sub_radix_sort(a: list[int], base: int) -> list[int]:
+def sub_radix_sort(a: list[int], base: int) -> list[int]: # O(n*k)
     
     
     
